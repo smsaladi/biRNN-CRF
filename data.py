@@ -23,11 +23,8 @@ def get_train(seq_len=None):
   labels = X[:,:,22:30]
   mask = X[:,:,30] * -1 + 1
 
-  a = np.arange(0,21)
-  b = np.arange(35,56)
-  c = np.hstack((a,b))
-  X = X[:,:,c]
-
+  X = X[:,:,0:21]
+  
   # getting meta
   num_seqs = np.size(X,0)
   seqlen = np.size(X,1)
@@ -86,17 +83,13 @@ def get_test(seq_len=None):
   labels_test = X_test[:,:,22:30].astype('int32')
   mask_test = X_test[:,:,30].astype("float32") * -1 + 1
 
-  a = np.arange(0,21)
-  b = np.arange(35,56)
-  c = np.hstack((a,b))
-  X_test = X_test[:,:,c]
-
+  X_test = X_test[:,:,0:21]
+  
   # getting meta
   seqlen = np.size(X_test,1)
   d = np.size(X_test,2)
   num_classes = 8
   num_seq_test = np.size(X_test,0)
-  del a, b, c
 
   ## DUMMY -> CONCAT ##
   vals = np.arange(0,8)
